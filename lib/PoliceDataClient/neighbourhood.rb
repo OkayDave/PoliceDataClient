@@ -28,10 +28,10 @@ module PoliceDataClient
 
 
     def self.specific force_id, neighbourhood_id 
-      neighbourhood = Neighbourhood.new(force_id, neighbourhood_id, "")
+      neighbourhood = Neighbourhood.new(neighbourhood_id, force_id, "")
       neighbourhood.get_full_information
       
-      return neighbourhood.id.nil? ? nil : neighbourhood
+      return neighbourhood.neighbourhood_id.nil? ? nil : neighbourhood
     rescue 
       return nil
     end
@@ -39,16 +39,16 @@ module PoliceDataClient
     def get_full_information
       if self.description.nil?
         info_hash = get("/#{force_id}/#{neighbourhood_id}").parsed_response
-        @name            = info_hash["name"]             || ""
-        @url_force       = info_hash["url_force"]        || ""
-        @url_boundary    = info_hash["url_boundary"]     || ""
-        @contact_details = info_hash["contact_details"]  || []
-        @welcome_message = info_hash["welcome_message"]  || ""
-        @links           = info_hash["links"]            || []
-        @centre          = info_hash["centre"]           || {}
-        @locations       = info_hash["locations"]        || []
-        @population      = info_hash["population"].to_i  || 0
-        @description     = info_hash["description"]      || ""
+        @name            = info_hash["name"]                            || ""
+        @url_force       = info_hash["url_force"]                       || ""
+        @url_boundary    = info_hash["url_boundary"]                    || ""
+        @contact_details = info_hash["contact_details"]                 || {}
+        @welcome_message = info_hash["welcome_message"]                 || ""
+        @links           = info_hash["links"]                           || []
+        @centre          = info_hash["centre"]                          || {}
+        @locations       = Location.parse_array(info_hash["locations"]) || []
+        @population      = info_hash["population"].to_i                 || 0
+        @description     = info_hash["description"]                     || ""
       end
       return self
       

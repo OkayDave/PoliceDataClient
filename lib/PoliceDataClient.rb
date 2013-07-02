@@ -3,6 +3,7 @@ require_relative "./PoliceDataClient/version"
 require_relative "./PoliceDataClient/force"
 require_relative "./PoliceDataClient/engagement_method"
 require_relative "./PoliceDataClient/neighbourhood"
+require_relative "./PoliceDataClient/location"
 
 module PoliceDataClient
   include APISmith::Client
