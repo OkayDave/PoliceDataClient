@@ -1,6 +1,6 @@
 # PoliceDataClient
 
-TODO: Write a gem description
+This is WIP Ruby client library for the UK Police's data api: http://data.police.uk/docs/
 
 ## Installation
 
