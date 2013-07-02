@@ -30,8 +30,5 @@ describe PoliceDataClient::Force do
     subject.specific("made up force").must_be_nil
   end
 
-  it "must be able to retrieve full information from an instantiance half object" do 
-    subject.list.sample.get_full_information.description.wont_be_nil
-  end
 
 end
