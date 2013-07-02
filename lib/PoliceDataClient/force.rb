@@ -30,7 +30,7 @@ module PoliceDataClient
       force = Force.new(info_hash["id"], info_hash["name"])
       force.description = info_hash["description"]
       force.url = info_hash["url"]
-      force.engagement_methods = info_hash["engagement_methods"]
+      force.engagement_methods = EngagementMethod.parse_array(info_hash["engagement_methods"])
       force.telephone = info_hash["telephone"]
       return force.id.nil? ? nil : force
     rescue 
@@ -42,7 +42,7 @@ module PoliceDataClient
         info_hash = get("/forces/#{id}").parsed_response
         @description = info_hash["description"]
         @url = info_hash["url"]
-        @engagement_methods = info_hash["engagement_methods"]
+        @engagement_methods = EngagementMethod.parse_array(info_hash["engagement_methods"])
         @telephone = info_hash["telephone"]
       end
       return self
